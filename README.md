@@ -12,7 +12,7 @@
 	<!--
 	<iframe frameborder="0" width="100%" height="100%" src="https://www.facebook.com/video/embed?video_id=483606149212677%2F" scrolling="no" allowfullscreen ></iframe>
 	//-->
-	<iframe width="100%" height="100%" src="https://player.twitch.tv/?channel=yunaito4846&parent=yunaito.github.io" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+	<iframe width="100%" height="100%" src="https://player.twitch.tv/?channel=940046&parent=https://niyo0525.github.io/46/" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
 	
 		
 	</div>
