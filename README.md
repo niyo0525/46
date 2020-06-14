@@ -10,3 +10,13 @@
   <script async src="//client.uchat.io/uchat.js"></script>
   <u-chat room='940046' style="display:inline-block; width:100%; height:100%;"></u-chat>		
 </div>
+
+
+<iframe
+   src="https://clips.twitch.tv/embed?clip=IncredulousAbstemiousFennelImGlitch&parent=streamernews.example.com&parent=embed.example.com"
+   height="360"
+   width="640"
+   frameborder="0"
+   scrolling="no"
+   allowfullscreen="true">
+</iframe>
