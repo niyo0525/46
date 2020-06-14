@@ -7,7 +7,7 @@
 
 <body oncontextmenu='return false' ondragstart='return false' onselectstart='return false' >
 	<div id="container" style="float: left; width:78%; ">
-	  <iframe src="https://player.twitch.tv/?channel=940046&parent=www.example.com" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+	  <iframe width="100%" height="100%" src="https://player.twitch.tv/?channel=940046&parent=https://niyo0525.github.io/46/" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
 	</div>
 	<div id="livechat" style=" float: left; width:22%; height:100%;">
 		<script async src="//client.uchat.io/uchat.js"></script>
