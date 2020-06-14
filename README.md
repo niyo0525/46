@@ -1,22 +1,3 @@
-<style>
-#layerPopup{
-  width:  77%; 
-  height: 15%;
-  padding:0px; 
-  border:0px solid #fff; 
-  position:absolute; 
-  left:0.5%; 
-  bottom:3%; 
-  background:#fff;
-  filter:alpha(opacity=50); opacity:0.5; -moz-opacity:0.5;
-  text-align:right;
-}
-
-#layerPopup input{
-  cursor:pointer;
-}
-</style>
-
 <html>
 <head>
 <title>니요방송</title>
