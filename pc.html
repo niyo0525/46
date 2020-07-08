@@ -1,3 +1,47 @@
+<style>
+.SplitWindow {
+  width: 100%;
+}
+
+.SplitWindow div {
+  height: 300px;
+  overflow: auto;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.LeftPane {
+  float: left;
+  padding: 15px;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+  width: 200px;
+  background-color: wheat;
+  z-index: 5;
+}
+
+.RightPane {
+  width: 50%;
+  padding: 15px;
+  float:left;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+  background-color: lightblue;
+  z-index: 5;
+}
+
+.Splitter {
+  float: left;
+  width: 5px;
+  cursor: w-resize;
+  background-color: #ccc;
+  z-index: 25;
+}
+</style>
+
 <html>
 <head>
 <title>니요방송pc</title>
@@ -5,24 +49,55 @@
 <link rel="stylesheet" href="default.css" type="text/css">
 
 
-</head>
-<body oncontextmenu='return false' ondragstart='return false' onselectstart='return false' >
-	<div id="container" style="float: left; width:78%; ">
-	<!--
-	<iframe frameborder="0" width="100%" height="100%" src="https://www.facebook.com/video/embed?video_id=483606149212677%2F" scrolling="no" allowfullscreen ></iframe>
-	//-->
-	<iframe width="100%" height="100%" src="https://player.twitch.tv/?channel=940046&parent=niyo0525.github.io" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
-	
-		
-	</div>
-	<div id="livechat" style=" float: left; width:22%; height:100%;">
-		<script async src="//client.uchat.io/uchat.js"></script>
-		<u-chat room='940046' style="display:inline-block; width:100%; height:100%;"></u-chat>		
-	</div>
+<div class="SplitWindow">
+  <div class="LeftPane">
+    <iframe width="100%" height="100%" src="https://player.twitch.tv/?channel=940046&parent=niyo0525.github.io" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+  </div>
+  <div class="Splitter"></div>
+  <div class="RightPane">
+    <script async src="//client.uchat.io/uchat.js"></script>
+	<u-chat room='940046' style="display:inline-block; width:100%; height:100%;"></u-chat>	
+  </div>
+</div>
 
-		
-		</div>
-		
-</body>
-		
-</html>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+var mouseIsDown = false;
+var defaultWidth = 320;
+var minLeft = 100;
+var minRight = 100;
+
+$().ready(function () {
+  $('.LeftPane').css('width', defaultWidth);
+  $('.RightPane').css('width', $('.SplitWindow').width() - (defaultWidth + $('.Splitter').width()));
+  
+  $(document).mousedown(function (e) {
+    if ((!mouseIsDown) && $(e.target).hasClass('Splitter')) {
+      mouseIsDown = true;
+    }
+  }).mousemove(function (e) {
+    if (mouseIsDown) {
+      var posX = e.pageX;
+      var allWidth = $('.SplitWindow').width();
+      var useX = (posX < minLeft) ? minLeft : (allWidth - posX < minRight) ? allWidth - minRight : posX;
+      $('.LeftPane').css('width', useX - $('.Splitter').width() - 4).css('user-select', 'none');
+      $('.RightPane').css('width', allWidth - (useX - 4)).css('user-select', 'none');
+    }
+  }).mouseup(function () {
+    mouseIsDown = false;
+    $('.LeftPane').css('user-select', 'text');
+    $('.RightPane').css('user-select', 'text');
+  }).click(function () {
+    mouseIsDown = false;
+    $('.LeftPane').css('user-select', 'text');
+    $('.RightPane').css('user-select', 'text');
+  }).dblclick(function (e) {
+    mouseIsDown = false;
+    var allWidth = $('.SplitWindow').width().css('user-select', 'text');
+    $('.LeftPane').css('width', defaultWidth).css('user-select', 'text');
+    $('.RightPane').css('width', allWidth - (defaultWidth + $('.Splitter').width()));
+  });
+});
+</script>
