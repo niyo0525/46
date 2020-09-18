@@ -1,28 +1,93 @@
-<html>
-<head>
+<link rel="stylesheet" type="text/css" href="">
+<style>
+.split-container{
+  width: 100%;
+  height: auto;
+}
+.split-container__panel{
+  box-sizing: border-box;
+  display: inline-block;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+  user-select: none;
+}
+.split-container__panel--left{
+  width: 75%;
+}
+.split-container__splitter{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 100%;
+  width: 5px;
+  background-color: #cecece;
+  cursor: e-resize;
+}
+.split-container__panel--right{
+  width: 25%;
+}
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+</style>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
+<script>
+angular.module('sample', [])
+.directive('splitContainer', function(){
+  return {
+    transclude: {
+      leftpanel: 'splitLeftpanel',
+      rightpanel: 'splitRightpanel',
+    },
+    restrict: 'E',
+    template: '<div class="split-container noselect"><div><div class="split-container__panel split-container__panel--left"><div ng-transclude="leftpanel"></div><div class="split-container__splitter"></div></div><div class="split-container__panel split-container__panel--right" ng-transclude="rightpanel">test</div>',
+    link: function(scope, el, attrs, controller, transFun){
+      var self = this;
+      var leftPanel = el.find(".split-container__panel--left");
+      var rightPanel = el.find(".split-container__panel--right");
+      var container = el.find(".split-container");
+      el.on("mousedown", function(e){
+        if(e.target.className === 'split-container__splitter'){
+          self.drag = true;
+        }
+      });
+      el.on("mouseup", function(e){
+          self.drag = false;
+      });
+      el.on("mousemove", function(e){
+          console.log(container.width()-e.clientX);
+        if(self.drag===true){
+          leftPanel.width(e.clientX-5);
+          rightPanel.width(container.width()-e.clientX);
+        }
+      });
+    }
+  };
+})
+</script>
+
 <title>니요방송pc</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="default.css" type="text/css">
-
-
-</head>
-<body oncontextmenu='return false' ondragstart='return false' onselectstart='return false' >
-	<div id="container" style="float: left; width:78%; ">
-	<!--
-	<iframe frameborder="0" width="100%" height="100%" src="https://www.facebook.com/video/embed?video_id=483606149212677%2F" scrolling="no" allowfullscreen ></iframe>
-	//-->
-	<iframe width="100%" height="100%" src="https://player.twitch.tv/?channel=940046&parent=niyo0525.github.io" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
-	
-		
-	</div>
-	<div id="livechat" style=" float: left; width:22%; height:100%;">
-		<script async src="//client.uchat.io/uchat.js"></script>
-		<u-chat room='940046' style="display:inline-block; width:100%; height:100%;"></u-chat>		
-	</div>
-
-		
-		</div>
-		
-</body>
-		
-</html>
+<div ng-app='sample'>
+  <split-container>
+    <split-leftpanel>
+      <iframe width="100%" height="100%" src="https://player.twitch.tv/?channel=940046&parent=niyo0525.github.io" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+	</split-leftpanel>
+    <split-rightpanel>
+	  <div id="livechat" style=" float: left; width:100%; height:100%;">
+	  	<script async src="//client.uchat.io/uchat.js"></script>
+	  	<u-chat room='940046' style="display:inline-block; width:100%; height:100%;"></u-chat>		
+	  </div>
+    </split-rightpanel>
+  </split-container>
+</div>
