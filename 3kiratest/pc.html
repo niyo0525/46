@@ -1,6 +1,6 @@
 <html lang="ko">
 <head>
-<title>니요방송pc(3기라3)</title>
+<title>니요방송pc(3기라4)</title>
 <link rel="stylesheet" href="https://poooo.ml:443/css/default.css?ver=161101">
 <link rel="stylesheet" href="https://poooo.ml:443/thema/poo_pc/side/style.css?v8" type="text/css" >
 <link rel="stylesheet" href="https://poooo.ml:443/thema/poo_pc/side/optscroll.css" type="text/css" >
@@ -61,7 +61,7 @@
 
 <div class="bd-content-area">
 	<div class="videoarea" id="videoarea">
-								<div class="vidInner" style="height: initial !important;">
+								<div class="vidInner">
       <iframe width="100%" height="100%" src="https://player.twitch.tv/?channel=
 zlgnesa&parent=niyo0525.github.io" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
 			</div>
@@ -69,107 +69,7 @@ zlgnesa&parent=niyo0525.github.io" frameborder="0" allow="autoplay; encrypted-me
 
 </div>
 
-<script>
-//Set cookie
-var winH = $(window).height() - 70;
-//Set side cookie
-if(get_cookie("left_wings") == 1){
-	$('#outer').addClass("narrow");
-	$('#outer').removeClass("wide");
-} else{
-	$('#outer').addClass("wide");
-	$('#outer').removeClass("narrow");
-	$('.bd-content-area .vidInner').height(winH);
-}
 
-//vid_ajax
-function reload_vid(){ 
-	 $.ajax({
-		type:"POST",
-		url:"https://poooo.ml:443/thema/poo_pc/side/videoarea.php?reload=reload",
-		data:{info:"2ka04xz7"},
-		dataType:"html",
-		success:function(result) {
-			$('.videoarea').html(result);
-			$('.bd-content-area .vidInner').height(winH);
-		},
-		error:function() {
-		}
-	});
-} 		
-
-//Channe_lajax
-function channel_ajax(src){ 
-	 $.ajax({
-		type:"POST",
-		url:"https://poooo.ml:443/thema/poo_pc/side/player.php?reload=reload",
-		data:{src:src},
-		dataType:"html",
-		success:function(result) {
-			$('.videoarea').html(result);
-			$('.bd-content-area .vidInner').height(winH);
-		},
-		error:function() {
-		}
-	});
-} 		
-
-//Channe_lajax
-function channel_ajax_clappr(src){ 
-	 $.ajax({
-		type:"POST",
-		url: g5_bbs_url  + "/poo_vid/clappr_player.php",
-		data:{src:src},
-		dataType:"html",
-		success:function(result) {
-			$('.videoarea').html(result);
-			$('.bd-content-area .vidInner').height(winH);
-		},
-		error:function() {
-		}
-	});
-} 		
-
-
-//Change flowplayer
-function getval(sel) {
-      var box = sel.value;
-      if(box=="cdn"){
-      		src = "";
-      		channel_ajax(src);
-      } else if(box=="tok"){
-      		src = "";
-      		channel_ajax(src);
-      } else if(box=="la"){
-      		src = "";
-      		channel_ajax(src);
-      } else if(box=="atl"){
-      		src = "";
-      		channel_ajax(src);
-      } else if(box=="lon"){
-      		src = "";
-      		channel_ajax(src);
-      } else if(box=="3"){
-      		$('.vidInner').html("<iframe id='su-ivp' src='https://streamup.com//embeds/video?startMuted=true' scrolling='no' frameborder='0' marginwidth='0' marginheight='0' allowTransparency='true' allowFullScreen='true'></iframe>");
-      } else if(box=="flow"){
-      	 	src = "https://player.twitch.tv/?channel=zkasl2kq&parent=twitch.tv&parent=poooo.ml";
-  			channel_ajax();
-      } else if(box=="cl"){
-      		$(".flowplayer").remove();
-      		var player = new Clappr.Player({source: "https://player.twitch.tv/?channel=zkasl2kq&parent=twitch.tv&parent=poooo.ml", parentId: ".vidInner",  autoPlay: "true",height:"100%",width:"100%"});
-      } else if(box=="ur"){
-      		$('.vidInner').html("<iframe id='su-ivp' src='http://www.ustream.tv/embed/' frameborder='0' allowFullScreen></iframe>");
-      } else if(box=="uh"){
-      		$('.vidInner').html("<iframe id='su-ivp' src='http://www.ustream.tv/embed/?html5ui=1' frameborder='0' allowFullScreen></iframe>");
-      }else if(box=="okruplayer"){
-      		$('.vidInner').html("<iframe width='100%' height='100%' src='//ok.ru/videoembed/?nochat=1&amp;autoplay=1' frameborder='0' allowfullscreen=''></iframe>");
-      } else if(box=="pooplayer"){
-      		src = "";
-      		channel_ajax_clappr(src);
-      };
-      
-}   
-</script>
 							
 
                     </div><!--nano content-->
